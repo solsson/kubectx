@@ -1,5 +1,20 @@
 This repository provides both `kubectx` and `kubens` tools.
 
+** this fork ** is the result of some quick digging of mine into kubectl productivity
+
+I basically got stuck at:
+ - https://github.com/solsson/kube-shell-docker
+ - https://github.com/kubernetes/kubernetes/issues/29322
+ - https://github.com/kubernetes/kubernetes/issues/27308
+ - https://unix.stackexchange.com/questions/4219/how-do-i-get-bash-completion-for-command-aliases
+
+I don't spend a lot of time switching between contexts. Happens per workday, basically.
+But `kubens` from this repo is interesting. However I switch namespace a lot more often
+than I do `cd -` and `git checkout -`.
+
+Effects I seek:
+ * Bash completion compatible with per-execution kubectl namespace selection.
+ * Display clearly in prompt which context I'm in (aliases in kubectx are great).
 
 **`kubectx`** help you switch between clusters back and forth:
 ![kubectx demo GIF](img/kubectx-demo.gif)
