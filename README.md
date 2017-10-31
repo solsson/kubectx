@@ -16,35 +16,11 @@ Effects I seek:
  * Bash completion compatible with per-execution kubectl namespace selection.
  * Display clearly in prompt which context I'm in (aliases in kubectx are great).
 
-Current ~/.bash_profile hack
-
-```bash
-[[ -z "$K_SHELL_ID" ]] && export K_SHELL_ID=$(date +%s%N)
-
-get_kubectx_for_this_shell() {
-  [[ -f ~/.kubectx_history ]] || exit
-  cat ~/.kubectx_history | grep "$K_SHELL_ID=" | tail -n 1 | awk -F '=' '{ print $2 }'
-}
-
-# https://coderwall.com/p/fasnya/add-git-branch-name-to-bash-prompt
-parse_git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-
-host_or_kube_ctx_or_whatever() {
-  AT="";
-
-  [[ "$HOSTNAME" =~ "MacBook" ]] || AT="$HOSTNAME"
-
-  KUBECTX="$(get_kubectx_for_this_shell)"
-
-  [[ -z "$KUBECTX" ]] || AT="$AT$KUBECTX"
-
-  echo "$AT"
-}
-
-export PS1="\u@\[\033[34m\]\$(host_or_kube_ctx_or_whatever)\[\033[00m\] \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
-```
+Ah, *forget it*. Switching context in ~/.kube/config
+_introduces a major risk_ because it affects all shells
+on the current host.
+`export KUBECONFIG= ` with separate files for each context
+does not suffer from that risk.
 
 **`kubectx`** help you switch between clusters back and forth:
 ![kubectx demo GIF](img/kubectx-demo.gif)
