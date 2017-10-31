@@ -76,6 +76,9 @@ save_context() {
 
 switch_context() {
   kubectl config use-context "${1}"
+  if [[ -f "${SCRIPT_DIR}/kubeprompt" ]]; then
+    source "${SCRIPT_DIR}/kubeprompt" "${1}"
+  fi
 }
 
 set_context() {
