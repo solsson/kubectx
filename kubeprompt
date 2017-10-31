@@ -1,0 +1,12 @@
+#!/bin/bash
+
+HISTORY_FILE=~/.kubectx_history
+
+CONTEXT_NAME=${1}
+
+# This is very custom, requires an id exported from ~/.bash_profile etc
+[ -z "$K_SHELL_ID" ] && exit 0
+
+#echo "Shell $K_SHELL_ID context $CONTEXT_NAME ($SCRIPT_DIR)" 
+
+echo "$K_SHELL_ID=$CONTEXT_NAME" >> $HISTORY_FILE
